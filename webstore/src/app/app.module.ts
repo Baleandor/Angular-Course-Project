@@ -13,6 +13,7 @@ import { MatTableModule } from '@angular/material/table'
 import { MatBadgeModule } from '@angular/material/badge'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatListModule } from '@angular/material/list'
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +24,10 @@ import { ProductsHeaderComponent } from './pages/home/components/products-header
 
 import { FiltersComponent } from './pages/home/components/filters/filters.component';
 import { ProductBoxComponent } from './pages/home/components/product-box/product-box.component';
+import { CartComponent } from './pages/cart/cart.component';
+import { CartService } from './services/cart.service';
+import { StoreService } from './services/store.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -31,7 +36,8 @@ import { ProductBoxComponent } from './pages/home/components/product-box/product
     HomeComponent,
     ProductsHeaderComponent,
     FiltersComponent,
-    ProductBoxComponent
+    ProductBoxComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
@@ -49,8 +55,10 @@ import { ProductBoxComponent } from './pages/home/components/product-box/product
     MatTableModule,
     MatBadgeModule,
     MatSnackBarModule,
+    HttpClientModule,
+    MatBottomSheetModule
   ],
-  providers: [],
+  providers: [CartService, StoreService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
