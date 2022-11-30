@@ -28,6 +28,11 @@ import { CartComponent } from './pages/cart/cart.component';
 import { CartService } from './services/cart.service';
 import { StoreService } from './services/store.service';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthenticatorComponent } from './tools/authenticator/authenticator.component';
+
+import { FirebaseTSApp } from 'firebasets/firebasetsApp/firebaseTSApp'
+import { environment } from 'src/environments/environment';
+import { LoginService } from './services/login.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +42,8 @@ import { HttpClientModule } from '@angular/common/http';
     ProductsHeaderComponent,
     FiltersComponent,
     ProductBoxComponent,
-    CartComponent
+    CartComponent,
+    AuthenticatorComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +64,12 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     MatBottomSheetModule
   ],
-  providers: [CartService, StoreService],
+  providers: [CartService, StoreService, LoginService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+  constructor() {
+    FirebaseTSApp.init(environment.firebaseConfig)
+  }
+}

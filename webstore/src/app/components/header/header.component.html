@@ -1,5 +1,7 @@
 <mat-toolbar class="max-w-7xl mx-auto border-x justify-between">
     <a routerLink="home">Angular Web Store Experience</a>
+    <span *ngIf="!loggedIn()" class="cursor-pointer" (click)="onLoginClick()">Login</span>
+    <span *ngIf="loggedIn()" class="cursor-pointer" (click)="onLogout()" >Logout</span>
     <button mat-icon-button [matMenuTriggerFor]="menu">
 
         <mat-icon [matBadge]="itemsQuantity" [matBadgeHidden]="!itemsQuantity" matBadgeColor="warn">shopping_cart

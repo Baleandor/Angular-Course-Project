@@ -1,3 +1,27 @@
-<div>
-    
+<div class="flex justify-center itmems-center p-5 box-border">
+    <mat-card>
+        <mat-card-header class="w-full max-w-md p-4">
+            <mat-card-title>{{getStateText()}}</mat-card-title>
+        </mat-card-header>
+        <div *ngIf="isLoginState()">
+            <input  #loginEmail class="w-full p-15 my-4 rounded-md outline-none border-solid border-slate border-2 box-border"
+                placeholder="Email">
+            <input  #loginPassword class="w-full p-15 my-4 rounded-md outline-none border-solid border-slate border-2 box-border"
+                placeholder="Password" type="password">
+            <button onclick="onLogin(loginEmail, loginPassword)" class="m-4" mat-flat-button color="warn">Login</button>
+        </div>
+        <div *ngIf="isRegisterState()">
+            <input #registerEmail class="w-full p-15 my-4 rounded-md outline-none border-solid border-slate border-2 box-border"
+                placeholder="Email">
+            <input #registerPassword class="w-full p-15 my-4 rounded-md outline-none border-solid border-slate border-2 box-border"
+                placeholder="Password" type="password">
+            <input #registerRepass class="w-full p-15 my-4 rounded-md outline-none border-solid border-slate border-2 box-border"
+                placeholder="Repeat Password" type="password">
+            <button (click)="onRegister(registerEmail, registerPassword, registerRepass)" mat-flat-button color="warn">Register</button>
+        </div>
+        <mat-card-actions align="end">
+            <button (click)="onRegisterClick()" class="m-5" mat-flat-button>Create an Account</button>
+            <button (click)="onLoginClick()" class="m-5" mat-flat-button>Login</button>
+        </mat-card-actions>
+    </mat-card>
 </div>

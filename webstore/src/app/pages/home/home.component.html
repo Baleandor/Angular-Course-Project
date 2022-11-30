@@ -3,15 +3,18 @@
         <app-filters (showCategory)="onShowCategory($event)"></app-filters>
     </mat-drawer>
     <mat-drawer-content class="p-6">
-        <app-products-header 
-        (sortChange)="onSortChange($event)"
-        (itemsCountChange)="onItemsCountChange($event)" 
-        (columnsCountChange)="onColumnsCountChange($event)"></app-products-header>
-        <mat-grid-list gutterSize="16" [cols]="cols" [rowHeight]="rowHeight">
+        <app-products-header (sortChange)="onSortChange($event)" (itemsCountChange)="onItemsCountChange($event)"
+            (columnsCountChange)="onColumnsCountChange($event)"></app-products-header>
+        <mat-grid-list *ngIf="getLogin()" gutterSize="16" [cols]="cols" [rowHeight]="rowHeight">
             <mat-grid-tile *ngFor="let product of products">
-                <app-product-box [product]="product" (addToCart)="onAddToCart($event)" class="w-full" [fullWidthMode]="cols === 1">
+                <app-product-box [product]="product" (addToCart)="onAddToCart($event)" class="w-full"
+                    [fullWidthMode]="cols === 1">
                 </app-product-box>
             </mat-grid-tile>
         </mat-grid-list>
+        <div *ngIf="!getLogin()">
+            <span></span>
+            <img class="w-full" src="assets/KrumpinShrek.png">
+        </div>
     </mat-drawer-content>
 </mat-drawer-container>

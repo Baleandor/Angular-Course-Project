@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { Product } from 'src/app/models/product.model';
 import { CartService } from 'src/app/services/cart.service';
 import { StoreService } from 'src/app/services/store.service';
-
+import { LoginService } from 'src/app/services/login.service';
 
 const ROWS_HEIGHT: { [id: number]: number } = { 1: 400, 3: 335, 4: 350 }
 
@@ -23,10 +23,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   count = '12'
   productSubscription: Subscription | undefined
 
-  constructor(private cartService: CartService, private storeService: StoreService) { }
+  constructor(private cartService: CartService, private storeService: StoreService, private login: LoginService) { }
 
   ngOnInit(): void {
     this.getProducts()
+  }
+
+  getLogin(): boolean {
+    return this.login.loggedIn()
   }
 
   getProducts(): void {
