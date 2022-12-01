@@ -4,6 +4,8 @@ import { Product } from 'src/app/models/product.model';
 import { CartService } from 'src/app/services/cart.service';
 import { StoreService } from 'src/app/services/store.service';
 import { LoginService } from 'src/app/services/login.service';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { AuthenticatorComponent } from 'src/app/tools/authenticator/authenticator.component';
 
 const ROWS_HEIGHT: { [id: number]: number } = { 1: 400, 3: 335, 4: 350 }
 
@@ -23,11 +25,16 @@ export class HomeComponent implements OnInit, OnDestroy {
   count = '12'
   productSubscription: Subscription | undefined
 
-  constructor(private cartService: CartService, private storeService: StoreService, private login: LoginService) { }
+  constructor(private cartService: CartService, private storeService: StoreService, private login: LoginService, private loginSheet: MatBottomSheet) { }
 
   ngOnInit(): void {
     this.getProducts()
   }
+
+  onBubbleClick() {
+    this.loginSheet.open(AuthenticatorComponent)
+  }
+
 
   getLogin(): boolean {
     return this.login.loggedIn()

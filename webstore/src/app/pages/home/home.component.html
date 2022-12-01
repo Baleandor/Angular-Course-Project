@@ -13,7 +13,10 @@
             </mat-grid-tile>
         </mat-grid-list>
         <div *ngIf="!getLogin()">
-            <span></span>
+            <span id="span-1" class="text-5xl  absolute">You gotta</span>
+            <span id="span-2" class="text-6xl text-red-600  absolute cursor-pointer"
+                (click)="onBubbleClick()">REGISTER</span>
+            <span id="span-3" class="text-5xl  absolute ">ta see it!</span>
             <img class="w-full" src="assets/KrumpinShrek.png">
         </div>
     </mat-drawer-content>

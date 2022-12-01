@@ -5,6 +5,7 @@ import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { AuthenticatorComponent } from 'src/app/tools/authenticator/authenticator.component';
 import { LoginService } from 'src/app/services/login.service';
 
+
 // import { FirebaseTSAuth } from 'firebasets/firebasetsAuth/firebaseTSAuth';
 
 @Component({
@@ -14,6 +15,7 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class HeaderComponent {
 
+  
   private _cart: Cart = { items: [] }
   itemsQuantity = 0
 
@@ -32,7 +34,7 @@ export class HeaderComponent {
   // isLoggedIn = false
 
   constructor(private cartService: CartService, private loginSheet: MatBottomSheet, private login: LoginService) {
-
+   
     // this.auth.listenToSignInStateChanges(
     //   user => {
     //     this.auth.checkSignInState({
@@ -52,6 +54,9 @@ export class HeaderComponent {
     // )
   }
 
+  getUserEmail(): string | undefined | null {
+    return this.login.auth.getAuth().currentUser?.email
+  }
 
   loggedIn(): boolean {
     return this.login.loggedIn()

@@ -1,17 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseTSAuth } from 'firebasets/firebasetsAuth/firebaseTSAuth'
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { FirebaseTSFirestore } from 'firebasets/firebasetsFirestore/firebaseTSFirestore'
 
 @Component({
   selector: 'app-authenticator',
   templateUrl: 'authenticator.component.html'
 })
 export class AuthenticatorComponent implements OnInit {
+
   state = AuthenticatorCompState.LOGIN
 
+  firestore: FirebaseTSFirestore
   firebasetsAuth: FirebaseTSAuth
   constructor(private bottomSheet: MatBottomSheet) {
     this.firebasetsAuth = new FirebaseTSAuth()
+    this.firestore = new FirebaseTSFirestore()
   }
 
   ngOnInit(): void {
@@ -21,6 +25,7 @@ export class AuthenticatorComponent implements OnInit {
     let email = registerEmail.value
     let password = registerPassword.value
     let repass = registerRepass.value
+
     if (this.isNotEmpty(email) &&
       this.isNotEmpty(password) &&
       this.isNotEmpty(repass) &&
@@ -36,7 +41,21 @@ export class AuthenticatorComponent implements OnInit {
           registerRepass.value = ''
         },
         onFail: (err) => {
-          alert("Failed to craete account!")
+          
+        }
+      })
+
+      this.firestore.create({
+        path: ["Users", this.firebasetsAuth?.getAuth()?.currentUser?.uid || '{}'],
+        data: {
+          email: email,
+          password: password
+        },
+        onComplete: (docId) => {
+          alert('Account created successfully!')
+        },
+        onFail: (err) => {
+          
         }
       })
     }
@@ -45,7 +64,7 @@ export class AuthenticatorComponent implements OnInit {
   onLogin(loginEmail: HTMLInputElement, loginPassword: HTMLInputElement) {
     let email = loginEmail.value
     let password = loginPassword.value
-
+    
     if (this.isNotEmpty(email) && this.isNotEmpty(password)) {
       this.firebasetsAuth.signInWith({
         email: email,

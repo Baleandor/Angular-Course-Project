@@ -1,26 +1,28 @@
 import { Injectable } from "@angular/core";
 import { FirebaseTSAuth } from 'firebasets/firebasetsAuth/firebaseTSAuth';
-
+import { FirebaseTSFirestore } from 'firebasets/firebasetsFirestore/firebaseTSFirestore';
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class LoginService {
-    auth = new FirebaseTSAuth()
+
+    firestore: FirebaseTSFirestore
+    auth: FirebaseTSAuth
     isLoggedIn = false
 
     constructor() {
+        this.auth = new FirebaseTSAuth()
+        this.firestore = new FirebaseTSFirestore()
 
         this.auth.listenToSignInStateChanges(
             user => {
                 this.auth.checkSignInState({
                     whenSignedIn: user => {
-                        alert('Logged in!')
                         this.isLoggedIn = true
                     },
                     whenSignedOut: user => {
-                        alert('Logged out!')
                         this.isLoggedIn = false
                     },
                     whenChanged: user => {
