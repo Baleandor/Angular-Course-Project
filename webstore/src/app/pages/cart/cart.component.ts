@@ -14,7 +14,7 @@ export class CartComponent implements OnInit {
   cart: Cart = {
     items: [{
       product: 'https://via.placeholder.com/150',
-      name: 'hoes',
+      name: 'shoes',
       price: 0.77,
       quantity: 69,
       id: 420
